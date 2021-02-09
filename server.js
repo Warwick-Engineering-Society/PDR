@@ -16,7 +16,7 @@ var strategy = new saml(
     logoutUrl: "https://idp-test.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO",
     issuer: "https://pdr.engsoc.uk/",
     cert: decryptionCert,
-    host: "https://pdr.engsoc.uk"
+    host: "pdr.engsoc.uk"
   },
   (profile, done) => {
     findByEmail(profile.email, function (err, user) {
@@ -33,8 +33,11 @@ passport.use(strategy);
 
 app.set("view-engine", "ejs");
 
+app.use(express.static(path.join(__dirname, "public")));
+app.use('/pwa-install-prompt', express.static(__dirname + '/node_modules/pwa-install-prompt/'));
+
 app.get("/", (req, res) => {
-  if (profile.email) {
+  if (req.isAuthenticated()) {
     res.render("index.ejs", { profile });
   } else {
     res.redirect("/login");
@@ -58,4 +61,6 @@ app.get(
 
 console.log(strategy.generateServiceProviderMetadata(decryptionCert));
 
-app.listen(3000);
+const listener = app.listen(42056, function() {
+  console.log("Listening on port " + listener.address().port);
+});
