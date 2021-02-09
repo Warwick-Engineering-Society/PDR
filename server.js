@@ -1,4 +1,5 @@
 const { response } = require("express");
+const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const app = express();
@@ -13,7 +14,7 @@ var strategy = new saml(
     entryPoint: "https://idp-test.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO",
     issuer: "Warwick Engineering Society PDR",
     protocol: "https://",
-    logoutUrl: "https://idp-test.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO",
+    logoutUrl: "https://idp-test.warwick.ac.uk/idp/profile/Logout",
     issuer: "https://pdr.engsoc.uk/",
     cert: decryptionCert,
     host: "pdr.engsoc.uk"
