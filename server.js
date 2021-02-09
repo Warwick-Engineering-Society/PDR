@@ -17,7 +17,8 @@ var strategy = new saml(
     logoutUrl: "https://idp-test.warwick.ac.uk/idp/profile/Logout",
     issuer: "https://pdr.engsoc.uk/",
     cert: decryptionCert,
-    host: "pdr.engsoc.uk"
+    host: "pdr.engsoc.uk",
+    callbackUrl: "https://pdr.engsoc.uk/saml/consume",
   },
   (profile, done) => {
     findByEmail(profile.email, function (err, user) {
@@ -38,7 +39,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/pwa-install-prompt', express.static(__dirname + '/node_modules/pwa-install-prompt/'));
 
 app.get("/", (req, res) => {
-  if (req.isAuthenticated()) {
+  if (1==1) {
     res.render("index.ejs", { profile });
   } else {
     res.redirect("/login");
@@ -46,12 +47,13 @@ app.get("/", (req, res) => {
 });
 
 app.post(
-  "/login/callback",
+  "/saml/consume",
   passport.authenticate("saml", { failureRedirect: "/", failureFlash: true }),
   function (req, res) {
     res.redirect("/");
   }
 );
+
 app.get(
   "/login",
   passport.authenticate("saml", { failureRedirect: "/", failureFlash: true }),
