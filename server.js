@@ -46,7 +46,12 @@ const app = express();
 
 app.use(cookieParser());
 app.use(bodyParser());
-app.use(session({ secret: "my super secret secret" }));
+app.use(session(
+  {
+    secret: "my super secret secret",
+    cookie: { maxAge: 99999999999 },
+  }
+));
 app.use(passport.initialize());
 app.use(passport.session());
 
