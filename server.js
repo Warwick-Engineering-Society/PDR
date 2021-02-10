@@ -3,12 +3,12 @@ const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const fetch = require("node-fetch");
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
-var passport = require("passport");
-var saml = require("passport-saml").Strategy;
+const passport = require("passport");
+const saml = require("passport-saml").Strategy;
 const signingCert = fs.readFileSync("./idpSigning.crt", "utf-8");
 
 
@@ -20,7 +20,7 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-var strategy = new saml(
+const strategy = new saml(
   {
     entryPoint: "https://idp-test.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO",
     issuer: "Warwick Engineering Society PDR",
