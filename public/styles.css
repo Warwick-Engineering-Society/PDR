@@ -54,14 +54,14 @@ form {
   color: white;
   touch-action: pan-y;
 }
-.font400{
-  font-size:400%;
+.fontBig{
+  font-size:300%;
 }
 .center-fit {
-  max-width: 50%;
+  max-width: 75%;
   margin: auto;
   margin-top: 2em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
 }
 img{
   max-width: 500px;

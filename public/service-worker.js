@@ -1,4 +1,4 @@
-const cacheName='cacheStorage'
+const cacheName = 'cacheStorage'
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(cacheName).then(function (cache) {
@@ -20,8 +20,8 @@ self.addEventListener('install', function (event) {
   );
 });
 
-self.addEventListener('activate', function(event){
-  console.log('[Service Worker] Activating Service Worker.....',event);
+self.addEventListener('activate', function (event) {
+  console.log('[Service Worker] Activating Service Worker.....', event);
   return self.clients.claim();
 });
 

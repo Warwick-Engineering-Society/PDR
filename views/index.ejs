@@ -1,4 +1,6 @@
+<!doctype html>
 <html lang="en">
+
 <head>
     <title>PDR App</title>
     <meta charset="UTF-8" />
@@ -6,13 +8,13 @@
     <meta content="" name="description">
     <meta http-equiv="cache-control" content="max-age=800" />
     <meta http-equiv="cache-control" content="Private" />
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1" user-scalable=0 maximum-scale=1.0/>
-    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" user-scalable=0 maximum-scale=1.0 />
+
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" type="text/css" href="/styles.css" />
     <link rel="stylesheet" href="/pwa-install-prompt/style.css" />
-    
+
     <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
@@ -22,17 +24,17 @@
     <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
-    
-    
+
+
     <script type="text/javascript" src="/pwa-install-prompt/script.js"></script>
-    
+
     <script>
         const serverUrl = window.location.href;
         const render = async () => {
-        html = `
-        <p class="smol">Welcome <%= name %>! <button onclick="handleLogout()">Logout</button></p>
+            html = `
+        <p class="smol">Welcome <%= name %>! <button onclick="handleLogout()"><%= buttonValue %></button></p>
         <p>You have</p>
-        <p id='point_area' class="font400"n</p>
+        <p id='point_area' class="fontBig"n</p>
             <p>PDR points</p>
             <p><a class="moreinfo" onclick="moreInfo()">More Info</a></p>
             <p style="font-size:0.5em;">Please note this app only shows PDR points gained at Engineering Society events since Sept 2019.</p>
@@ -40,80 +42,121 @@
             document.getElementById("app").innerHTML = html;
             let points = await fetch(`${serverUrl}server/points`, { method: "POST" })
             document.getElementById('point_area').innerHTML = await points.text();
-            var prompt = new pwaInstallPrompt();
-            
+
         }
-            const handleLogout = async () => {
-                window.location.href = `${serverUrl}logout`;
-            };
-            
-            const moreInfo = async () => {
-                
-                function replaceAll(string, search, replace) {
-                    return string.split(search).join(replace);
-                }
-                
-                let data = fetch(`${serverUrl}server/moreInfo`, { method: "POST" }).then(res => res.text());
-                data = (await data).toString()
-                data = replaceAll(data, "<br>", "\n");
-                alert(data);
-                
+        const handleLogout = async () => {
+            window.location.href = `${serverUrl}<%= buttonLink %>`;
+        };
+
+        const moreInfo = async () => {
+
+            function replaceAll(string, search, replace) {
+                return string.split(search).join(replace);
             }
 
-        </script>
-    </head>
-    <body onload="render()">
-        
-        <img class="center-fit" src='img/big_logo.png' >
-        
-        
-        <script type="text/javascript">
-        </script>
-        <div class="pwa-install-prompt__container">
-            <button class="pwa-install-prompt__overlay">Close</button>
-            <div class="pwa-install-prompt">
-                <div class="pwa-install-prompt__icon__container">
-                    <img class="pwa-install-prompt__icon" src="img/logo.png" alt="logo" />
-                </div>
-                <div class="pwa-install-prompt__content">
-                    <h3 class="pwa-install-prompt__title">Install PDR App</h3>
-                    <p class="pwa-install-prompt__text">Install this application on your home screen for quick and easy access when
-                        you’re on the go.</p>
-                        <p class="pwa-install-prompt__guide">Just tap <svg class="pwa-install-prompt__guide__icon" viewBox="0 0 128 128"
-                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>Share</title>
-                            <path fill="#007AFF"
-                            d="M48.883,22.992L61.146,10.677L61.146,78.282C61.146,80.005 62.285,81.149 64,81.149C65.715,81.149 66.854,80.005 66.854,78.282L66.854,10.677L79.117,22.992C79.693,23.57 80.256,23.853 81.114,23.853C81.971,23.853 82.534,23.57 83.11,22.992C84.25,21.848 84.25,20.125 83.11,18.981L65.997,1.794C65.715,1.511 65.421,1.215 65.139,1.215C64.563,0.932 63.718,0.932 62.861,1.215C62.579,1.498 62.285,1.498 62.003,1.794L44.89,18.981C43.75,20.125 43.75,21.848 44.89,22.992C46.029,24.149 47.744,24.149 48.883,22.992ZM103.936,35.32L81.114,35.32L81.114,41.053L103.936,41.053L103.936,121.27L24.064,121.27L24.064,41.053L46.886,41.053L46.886,35.32L24.064,35.32C20.928,35.32 18.355,37.904 18.355,41.053L18.355,121.27C18.355,124.419 20.928,127.003 24.064,127.003L103.936,127.003C107.072,127.003 109.645,124.419 109.645,121.27L109.645,41.053C109.645,37.891 107.072,35.32 103.936,35.32Z" />
-                        </svg> then “Add to Home Screen”</p>
-                    </div>
-                </div>
+            let data = fetch(`${serverUrl}server/moreInfo`, { method: "POST" }).then(res => res.text());
+            data = (await data).toString()
+            data = replaceAll(data, "<br>", "\n");
+            alert(data);
+
+        }
+
+    </script>
+</head>
+
+<body onload="render()">
+
+    <img class="center-fit" src='img/big_logo.png'>
+
+
+    <script type="text/javascript">
+    </script>
+    <div class="pwa-install-prompt__container">
+        <button class="pwa-install-prompt__overlay">Close</button>
+        <div class="pwa-install-prompt">
+            <div class="pwa-install-prompt__icon__container">
+                <img class="pwa-install-prompt__icon" src="img/icons/apple-touch-icon.png" alt="logo" />
             </div>
-            <div id="app">Loading...</div>
-            <script>var prompt = new pwaInstallPrompt();</script>
-        </body>
-        </html>
+            <div class="pwa-install-prompt__content">
+                <h3 class="pwa-install-prompt__title">Install PDR App</h3>
+                <p class="pwa-install-prompt__text">Install this application on your home screen for quick and easy
+                    access when
+                    you’re on the go.</p>
+                <p class="pwa-install-prompt__guide">Just tap <svg class="pwa-install-prompt__guide__icon"
+                        viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>Share</title>
+                        <path fill="#007AFF"
+                            d="M48.883,22.992L61.146,10.677L61.146,78.282C61.146,80.005 62.285,81.149 64,81.149C65.715,81.149 66.854,80.005 66.854,78.282L66.854,10.677L79.117,22.992C79.693,23.57 80.256,23.853 81.114,23.853C81.971,23.853 82.534,23.57 83.11,22.992C84.25,21.848 84.25,20.125 83.11,18.981L65.997,1.794C65.715,1.511 65.421,1.215 65.139,1.215C64.563,0.932 63.718,0.932 62.861,1.215C62.579,1.498 62.285,1.498 62.003,1.794L44.89,18.981C43.75,20.125 43.75,21.848 44.89,22.992C46.029,24.149 47.744,24.149 48.883,22.992ZM103.936,35.32L81.114,35.32L81.114,41.053L103.936,41.053L103.936,121.27L24.064,121.27L24.064,41.053L46.886,41.053L46.886,35.32L24.064,35.32C20.928,35.32 18.355,37.904 18.355,41.053L18.355,121.27C18.355,124.419 20.928,127.003 24.064,127.003L103.936,127.003C107.072,127.003 109.645,124.419 109.645,121.27L109.645,41.053C109.645,37.891 107.072,35.32 103.936,35.32Z" />
+                    </svg> then “Add to Home Screen”
+                </p>
+                <button class="pwa-install-prompt__chrome" style="display: none"> Install </button>
+
+            </div>
+        </div>
+    </div>
+    <div id="app">Loading...</div>
+    <script>
+        var prompt = new pwaInstallPrompt();
+        let deferredPrompt;
         
-        <script async>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/service-worker.js')
-                    .then((reg) => {
-                        console.log('Service worker registered.', reg);
-                    });
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            document.querySelector(".pwa-install-prompt__guide").style.display = "none"
+            document.querySelector(".pwa-install-prompt__chrome").style.display = "initial"
+            document.querySelector(".pwa-install-prompt__chrome").style.margin = 0;
+            document.querySelector(".pwa-install-prompt__text").style.marginBottom = "1em"
+            document.querySelector(".pwa-install-prompt__container").classList.add("is-active")
+        });
+
+        let btnAdd = document.querySelector(".pwa-install-prompt__chrome");
+        btnAdd.addEventListener('click', (e) => {
+            // hide our user interface that shows our A2HS button
+            btnAdd.style.display = 'none';
+            // Show the prompt
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt
+            deferredPrompt.userChoice
+                .then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the A2HS prompt');
+
+                    } else {
+                        console.log('User dismissed the A2HS prompt');
+                    }
+                    deferredPrompt = null;
                 });
-            }
-            
-            document.addEventListener('touchmove', function (event) {
-                if (event.scale !== 1) { event.preventDefault(); }
-            }, false);
-            
-            var lastTouchEnd = 0;
-            document.addEventListener('touchend', function (event) {
-                var now = (new Date()).getTime();
-                if (now - lastTouchEnd <= 300) {
-                    event.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, false);
-        </script>
-        
+            document.querySelector(".pwa-install-prompt__container").classList.remove("is-active")
+        });
+
+    </script>
+</body>
+
+</html>
+
+<script async>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then((reg) => {
+                    console.log('Service worker registered.', reg);
+                });
+        });
+    }
+
+    document.addEventListener('touchmove', function (event) {
+        if (event.scale !== 1) { event.preventDefault(); }
+    }, false);
+
+    var lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+</script>

@@ -22,10 +22,10 @@ passport.deserializeUser(function (user, done) {
 
 const strategy = new saml(
   {
-    entryPoint: "https://idp-test.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO",
+    entryPoint: "https://idp.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO",
     issuer: "Warwick Engineering Society PDR",
     protocol: "https://",
-    logoutUrl: "https://idp-test.warwick.ac.uk/idp/profile/Logout",
+    logoutUrl: "https://idp.warwick.ac.uk/idp/profile/Logout",
     issuer: "https://pdr.engsoc.uk/",
     cert: signingCert,
     host: "pdr.engsoc.uk",
@@ -49,7 +49,12 @@ app.use(bodyParser());
 app.use(session(
   {
     secret: "my super secret secret",
-    cookie: { maxAge: 99999999999 },
+    resave: true,
+    saveUninitialized: true,
+    rolling: true,
+    cookie: {
+      maxAge: 99999999999 // <- approx 3 years 
+    },
   }
 ));
 app.use(passport.initialize());
@@ -66,14 +71,23 @@ function ensureAuthenticated(req, res, next) {
 }
 
 app.get('/',
-  ensureAuthenticated,
-  function (req, res) {
-
-    console.log(req.user)
-    res.render("index.ejs", {
-      id: req.user.UniversityIDUnscoped,
-      name: req.user['urn:oid:2.5.4.42'],
-    })
+  async (req, res) => {
+    if (req.isAuthenticated()) {
+      console.log(req.user)
+      res.render("index.ejs", {
+        id: req.user.UniversityIDUnscoped,
+        name: req.user['urn:oid:2.5.4.42'],
+        buttonValue: "Log out",
+        buttonLink: "logout"
+      });
+    } else {
+      res.render("index.ejs", {
+        id: "0",
+        name: "Stranger",
+        buttonValue: "Login",
+        buttonLink: "login"
+      });
+    }
   }
 );
 
@@ -83,7 +97,7 @@ app.post("/server/points", async (req, res) => {
     let data = fetch(url).then(res => res.json())
     return res.send((await data).toString());
   } else {
-    return res.status(401).end(`User is not logged in.`);
+    return res.status(401).end(`Please login`);
   }
 });
 
@@ -93,7 +107,7 @@ app.post("/server/moreInfo", async (req, res) => {
     let data = fetch(url).then(res => res.text())
     return res.status(200).send((await data).toString());
   } else {
-    return res.status(401).end(`User is not logged in.`);
+    return res.status(401).end(`User is not logged in. Please login`);
   }
 });
 
@@ -112,6 +126,14 @@ app.post("/saml/consume",
     res.redirect("/");
   }
 );
+
+app.get('/loggedIn', async (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.status(200).send(true);
+  } else {
+    return res.status(200).send(false);
+  }
+});
 
 app.get('/login/fail',
   function (req, res) {
@@ -141,8 +163,6 @@ app.use(function (err, req, res, next) {
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/pwa-install-prompt', express.static(__dirname + '/node_modules/pwa-install-prompt/'));
-
-// console.log(strategy.generateServiceProviderMetadata(decryptionCert));
 
 const listener = app.listen(42056, function () {
   console.log("Listening on port " + listener.address().port);
