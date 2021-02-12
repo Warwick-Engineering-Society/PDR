@@ -122,7 +122,11 @@ app.post("/saml/consume",
   bodyParser.urlencoded({ extended: false }),
   passport.authenticate("saml", { failureRedirect: "/", failureFlash: true }),
   function (req, res) {
-    console.log('Hit');
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    console.log('=========================================================')
+    console.log(date + ' ' + time);
     res.redirect("/");
   }
 );
