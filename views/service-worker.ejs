@@ -1,0 +1,32 @@
+<script async type="text/javascript">
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js").then(reg => {
+                console.log("Service worker registered.", reg);
+            });
+        });
+    }
+
+    document.addEventListener(
+        "touchmove",
+        function (event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        },
+        false
+    );
+
+    var lastTouchEnd = 0;
+    document.addEventListener(
+        "touchend",
+        function (event) {
+            var now = new Date().getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        },
+        false
+    );
+</script>
