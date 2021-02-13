@@ -6,10 +6,24 @@ const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-
 const passport = require("passport");
+require('dotenv').config()
+
+let options = {
+  serverName: process.env.SERVER_NAME,
+  appName: process.env.APP_NAME,
+}
+
+if (process.env.MODE == "TEST") {
+  options.certFile = "./idp-testSigning.crt";
+  options.entryPoint = "https://idp-test.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO";
+} else {
+  options.certFile = "./idp-Signing.crt";
+  options.entryPoint = "https://idp.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO";
+
+}
 const saml = require("passport-saml").Strategy;
-const signingCert = fs.readFileSync("./idpSigning.crt", "utf-8");
+const signingCert = fs.readFileSync(options.certFile, "utf-8");
 
 
 passport.serializeUser(function (user, done) {
@@ -48,7 +62,7 @@ app.use(cookieParser());
 app.use(bodyParser());
 app.use(session(
   {
-    secret: "my super secret secret",
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     rolling: true,
@@ -168,6 +182,6 @@ app.use(function (err, req, res, next) {
 app.use(express.static(path.join(__dirname, "public")));
 app.use('/pwa-install-prompt', express.static(__dirname + '/node_modules/pwa-install-prompt/'));
 
-const listener = app.listen(42056, function () {
+const listener = app.listen(process.env.PORT, function () {
   console.log("Listening on port " + listener.address().port);
 });
