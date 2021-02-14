@@ -37,6 +37,11 @@ This repository can also be used as an template project for working with Univers
 1. ITS will ask you for "Service Provider (SP) metadata". You can find this at `https://domain.com/saml/Shibboleth.sso/Metadata`
 1. They should help you if you run into any issues.
 
+## Contributors
+<!-- If you wanted to be added here please submit a Pull Request -->
+
+- [Dhaval Soneji, Head of Technology 2019-2020](https://github.com/soneji) (main developer and project owner)
+
 ## Licensing
 
 This code is Licensed under the GNU GENERAL PUBLIC LICENSE Version 3. The main takeaway for someone trying to use this project to develop their own SAML application is that you must Open-Source it, under the same GPLv3 License. 
