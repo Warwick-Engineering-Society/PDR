@@ -11,6 +11,20 @@ This repository can also be used as an template project for working with Univers
 |:--:|:--:|:--:|
 |<img width="2000" src="screenshots/1.png">|<img width="2000" src="screenshots/2.png">|<img width="2000" src="screenshots/3.png">|
 
+## PDR Points
+
+### What are PDR Points?
+
+Professional Development Requirement points, or PDR for short are allocated to certain events by the School of Engineering. Their purpose is to introduce students to aspects of professional practice. Further information is available on the [Engineering Student Office website](https://warwick.ac.uk/fac/sci/eng/eso/undergraduate_students/c-admin/pdr). 
+
+### Why do I need PDR points?
+
+To progress to the 4th Year of an MEng degree, the School of Engineering requires each student to have obtained a minimum of 12 PDR points by the end of the first term of their 3rd Year.
+
+### How do I obtain PDR points?
+
+Simply attend any event that allocates PDR points and make sure your attendance is recorded. All Engineering Society conferences, site visits and careers events provide PDR points, so going to those is an easy way to hit your requirement. 
+
 ## Technologies Used
 
 -   JavaScript
