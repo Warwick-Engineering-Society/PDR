@@ -13,11 +13,11 @@ let options = {
 };
 
 if (process.env.MODE == "TEST") {
-    options.certFile = "./idp-testSigning.crt";
+    options.certFile = "./certs/idp-testSigning.crt";
     options.entryPoint = "https://idp-test.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO";
     options.logoutUrl = "https://idp-test.warwick.ac.uk/idp/profile/Logout";
 } else {
-    options.certFile = "./idpSigning.crt";
+    options.certFile = "./certs/idpSigning.crt";
     options.entryPoint = "https://idp.warwick.ac.uk/idp/profile/SAML2/Redirect/SSO";
     options.logoutUrl = "https://idp.warwick.ac.uk/idp/profile/Logout";
 }
