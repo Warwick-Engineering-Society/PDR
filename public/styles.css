@@ -1,0 +1,80 @@
+body,html{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden; 
+  font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  height: 100vh;
+  font-size: 18px;
+  background-color: black;
+  position: absolute;
+  max-width: 400px;
+  align-items: flex-start;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%)
+}
+
+#app {
+  padding: 1em;
+}
+
+h1 {
+  margin: 0;
+  padding-bottom: 18px;
+  font-size: 18px;
+}
+
+input,
+button {
+  padding: 9px;
+  font-size: 16px;
+  margin-bottom: 9px;
+  border: 1px solid white;
+}
+
+button{
+  border: 1px solid;
+  margin-left: 1em;
+}
+
+form {
+  margin: 0;
+}
+
+*{
+  text-align: center;
+  background-color: black;
+  color: white;
+  touch-action: pan-y;
+}
+.fontBig{
+  font-size:300%;
+}
+.center-fit {
+  max-width: 75%;
+  margin: auto;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+img{
+  max-width: 500px;
+}
+.smol {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+.moreinfo {
+  border: 1px solid white;
+  font-size: 90%;
+  margin: auto;
+  width: auto;
+  padding: 7px;
+}

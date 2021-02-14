@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PDR App</title>
+
+        <%- include("header.ejs") %>
+
+        <script type="text/javascript" src="/pwa-install-prompt/script.js"></script>
+
+        <script>
+            const serverUrl = window.location.href;
+            const render = async () => {
+                let points = await fetch(`${serverUrl}server/points`, {
+                    method: "POST",
+                });
+                document.getElementById("point_area").innerHTML = await points.text();
+            };
+            const handleLogout = async () => {
+                window.location.href = `${serverUrl}<%= buttonLink %>`;
+            };
+
+            const moreInfo = async () => {
+                function replaceAll(string, search, replace) {
+                    return string.split(search).join(replace);
+                }
+
+                let data = fetch(`${serverUrl}server/moreInfo`, {
+                    method: "POST",
+                }).then(res => res.text());
+                data = (await data).toString();
+                data = replaceAll(data, "<br>", "\n");
+                alert(data);
+            };
+        </script>
+    </head>
+
+    <body onload="render()">
+        <img class="center-fit" src="img/big_logo.png" />
+
+        <%- include("pwa_install_prompt.ejs") %>
+
+        <div id="app">
+            <p class="smol">
+                Welcome <%= name %>!
+                <button onclick="handleLogout()"><%= buttonValue %></button>
+            </p>
+            <p>You have</p>
+            <p id="point_area" class="fontBig">n</p>
+            <p>PDR points</p>
+            <p>
+                <a class="moreinfo" onclick="moreInfo()">More Info</a>
+            </p>
+            <p style="font-size: 0.5em">
+                Please note this app only shows PDR points gained at Engineering Society events
+                since Sept 2019.
+            </p>
+        </div>
+    </body>
+</html>
+
+<%- include("service-worker.ejs") %>
