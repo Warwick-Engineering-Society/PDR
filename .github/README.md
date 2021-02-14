@@ -33,6 +33,7 @@ This repository can also be used as an template project for working with Univers
 1. You should develop on the remote server as you need to provide valid metadata later to ITS, so I recommend using VSCode's Remote SSH Plugin which you can get [here](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
 1. Copy `sample.env` to `.env` and fill in the details
     - Leave DEBUG set to TRUE until UoW grant you access to the production SAML IDP systems.
+1. Run `npm i` to install dependencies
 1. Run `npm start` to start development
 1. ITS will ask you for "Service Provider (SP) metadata". You can find this at `https://domain.com/saml/Shibboleth.sso/Metadata`
 1. They should help you if you run into any issues.
