@@ -36,3 +36,19 @@ This repository can also be used as an template project for working with Univers
 1. Run `npm start` to start development
 1. ITS will ask you for "Service Provider (SP) metadata". You can find this at `https://domain.com/saml/Shibboleth.sso/Metadata`
 1. They should help you if you run into any issues.
+
+## Licensing
+
+This code is Licensed under the GNU GENERAL PUBLIC LICENSE Version 3. The main takeaway for someone trying to use this project to develop their own SAML application is that you must Open-Source it, under the same GPLv3 License. 
+
+Further details from [here](https://gist.github.com/kn9ts/cbe95340d29fc1aaeaa5dd5c059d2e60):
+
+1. Anyone can copy, modify and distribute this software.
+2. You have to include the license and copyright notice with each and every distribution.
+3. You can use this software privately.
+4. You can use this software for commercial purposes.
+5. If you dare build your business solely from this code, you risk open-sourcing the whole code base.
+6. If you modify it, you have to indicate changes made to the code.
+7. Any modifications of this code base MUST be distributed with the same license, GPLv3.
+8. This software is provided without warranty.
+9. The software author or license can not be held liable for any damages inflicted by the software.
