@@ -1,24 +1,25 @@
-body,html{
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow-y: hidden; 
-  font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+  overflow-y: hidden;
+  font-family: "proxima-nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-  Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    "Helvetica Neue", sans-serif;
   height: 100vh;
   font-size: 18px;
-  background-color: black;
+  background-color: rgb(67, 67, 67);
   position: absolute;
   max-width: 400px;
   align-items: flex-start;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%)
+  transform: translate(-50%);
 }
 
 #app {
@@ -39,7 +40,7 @@ button {
   border: 1px solid white;
 }
 
-button{
+button {
   border: 1px solid;
   margin-left: 1em;
 }
@@ -48,14 +49,14 @@ form {
   margin: 0;
 }
 
-*{
+* {
   text-align: center;
-  background-color: black;
+  background-color: rgb(67, 67, 67);
   color: white;
   touch-action: pan-y;
 }
-.fontBig{
-  font-size:300%;
+.fontBig {
+  font-size: 300%;
 }
 .center-fit {
   max-width: 75%;
@@ -63,7 +64,7 @@ form {
   margin-top: 2em;
   margin-bottom: 1em;
 }
-img{
+img {
   max-width: 500px;
 }
 .smol {
@@ -77,4 +78,8 @@ img{
   margin: auto;
   width: auto;
   padding: 7px;
+}
+
+.pwa-install-prompt__overlay {
+  background: rgb(67, 67, 67) !important;
 }
