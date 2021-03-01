@@ -1,5 +1,7 @@
 # Warwick Engineering Society PDR App
 
+![](/public/img/open-graph.png)
+
 This is an application for Warwick Engineering Society Members to be able to view PDR Points gained at Engineering Society events.
 
 This repository can also be used as an template project for working with University of Warwick SSO and JavaScript. Theoretically this project could easily be translated into an API for a React or Vue app.
