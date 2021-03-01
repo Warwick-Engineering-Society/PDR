@@ -62,4 +62,4 @@ Simply attend any event that allocates PDR points and make sure your attendance 
 
 ## Licensing
 
-This code is Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3. The main takeaway for someone trying to use this project to develop their own SAML application based on this code is that you must Open-Source it, under the same AGPLv3 License. 
+This code is Licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3. The main takeaway for someone using this project to develop their own SAML application based on any code in this repository is that you must Open-Source it, under the same AGPLv3 License. 
