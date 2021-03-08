@@ -75,7 +75,7 @@ app.get("/loggedIn", async (req, res) => {
     }
 });
 
-app.get("/saml/fail", function (req, res) {
+app.get("/fail", function (req, res) {
     res.status(401).send("Login failed");
 });
 
