@@ -58,7 +58,7 @@ Simply attend any event that allocates PDR points and make sure your attendance 
 ## Contributors
 <!-- If you wanted to be added here please submit a Pull Request -->
 
-- [Dhaval Soneji, Head of Technology 2019-2020](https://github.com/soneji) (main developer and project owner)
+- [Dhaval Soneji, Head of Technology 2020-2022](https://github.com/soneji) (main developer and project owner)
 
 ## Licensing
 
