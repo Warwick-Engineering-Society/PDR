@@ -32,17 +32,34 @@
                 alert(data);
             };
 
+            const fetchEventData = async () => {
+                var myHeaders = new Headers();
+                myHeaders.append("pragma", "no-cache");
+                myHeaders.append("cache-control", "no-cache");
+                var myInit = {
+                    method: "GET",
+                    headers: myHeaders,
+                };
+
+                let data = await fetch(`/events`, myInit)
+                data = await data.json();
+                console.log(data)
+            }
+
             const showEvents = () => {
-                console.log("CLICKED");
-                if ($("#toggle").css('width') == 0) {
+                fetchEventData()
+                if ($("#toggle").css('width') == "0px") {
                     document.getElementById("toggle").style.width = "250px";
-                } 
+                } else {
+                    document.getElementById("toggle").style.width = "0px";
+                }
             }
         </script>
     </head>
 
     <body onload="render()">
         <div id="toggle">
+            <a id="closeButton" onclick="showEvents()">&times;</a>
             <p>Events at EngSoc</p>
         </div>
         <img class="center-fit" src="img/big_logo.png" />
@@ -60,11 +77,11 @@
             <p>
                 <a class="moreinfo" onclick="moreInfo()">More Info</a>
                 <a class="moreinfo" onclick="showEvents()">Events</a>
-            </p> 
-            
-            <p style="font-size: 0.5em">
+            </p>
+            <p style="font-size: 0.65em; margin: 0 40px;">
                 Please note this app only shows PDR points gained at Engineering Society events
                 since Sept 2019.
+                <br />
                 <br />
                 The PDR points value is based on records held by the society and not the department
                 so for any doubts, please ask ESO

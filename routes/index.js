@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const fetch = require("node-fetch");
 
 app.get("/", async (req, res) => {
     if (req.isAuthenticated()) {
@@ -18,6 +19,12 @@ app.get("/", async (req, res) => {
             buttonLink: "saml/login",
         });
     }
+});
+
+app.get('/events', async(req, res) =>{
+    const response = await fetch('https://warwick-engineering-society.github.io/engsoc-events/data.json');
+    const data = await response.json()
+    return res.send(data);
 });
 
 module.exports = app;

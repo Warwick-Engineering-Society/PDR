@@ -22,5 +22,8 @@
   "description": "PDR App",
   "dir": "ltr",
   "lang": "en-GB",
-  "theme_color": "#ffffff"
+  "theme_color": "#ffffff",
+  "host_permissions": [
+    "https://Warwick-Engineering-Society.github.io/*"
+  ]
 }
