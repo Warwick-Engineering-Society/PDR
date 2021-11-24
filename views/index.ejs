@@ -70,8 +70,14 @@
                         )
                     }
 
-                    document.getElementById("eventList").innerHTML = events.reverse().join('')
+                    if (events == []) {
+                        document.getElementById("eventList").innerHTML = "No events are running at the moment."
+                    } else {
+                        document.getElementById("eventList").innerHTML = events.reverse().join('')
+                    }
                 })
+                
+
 
                 
 
