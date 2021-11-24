@@ -31,10 +31,20 @@
                 data = replaceAll(data, "<br>", "\n");
                 alert(data);
             };
+
+            const showEvents = () => {
+                console.log("CLICKED");
+                if ($("#toggle").css('width') == 0) {
+                    document.getElementById("toggle").style.width = "250px";
+                } 
+            }
         </script>
     </head>
 
     <body onload="render()">
+        <div id="toggle">
+            <p>Events at EngSoc</p>
+        </div>
         <img class="center-fit" src="img/big_logo.png" />
 
         <%- include("pwa_install_prompt.ejs") %>
@@ -49,7 +59,9 @@
             <p>PDR points</p>
             <p>
                 <a class="moreinfo" onclick="moreInfo()">More Info</a>
-            </p>
+                <a class="moreinfo" onclick="showEvents()">Events</a>
+            </p> 
+            
             <p style="font-size: 0.5em">
                 Please note this app only shows PDR points gained at Engineering Society events
                 since Sept 2019.
