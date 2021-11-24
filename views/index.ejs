@@ -41,9 +41,39 @@
                     headers: myHeaders,
                 };
 
-                let data = await fetch(`/events`, myInit)
-                data = await data.json();
-                console.log(data)
+                fetch(`events`, myInit)
+                .then((data) => data.json())
+                .then((data) => {
+                    console.log(data)
+                    events = []
+                    for (let event in data["data"]) {
+                        curr = data["data"][event]
+                        date = new Date(Date.parse(curr['time']))
+                        
+                        weekday = date.toLocaleString("en-US", {weekday: "long"})
+                        day = date.toLocaleString("en-US", {day: "numeric"})
+                        month = date.toLocaleString("en-US", {month: "numeric"})
+                        year = date.toLocaleString("en-US", {year: "numeric"})
+
+                        events.push(
+                            `
+                            <li style="padding: 5px">
+                                <p style="font-size: 0.9rem; margin-bottom: 0px; font-weight: 700"> ${curr['name']} </p>
+                                <p style="font-size: 0.9rem; margin: 0px"> ${weekday + ' ' + day + '-' + month + '-' + year} </p>
+                                <p style="font-size: 0.9rem; margin: 0px"> ${curr['place']} </p>
+                                <p style="font-size: 0.9rem; margin: 0px"> ${curr['description']} </p>
+                                
+                            </li>
+                            `
+                        )
+                    }
+
+                    document.getElementById("eventList").innerHTML = events.join('')
+                })
+
+                
+
+
             }
 
             const showEvents = () => {
@@ -60,7 +90,8 @@
     <body onload="render()">
         <div id="toggle">
             <a id="closeButton" onclick="showEvents()">&times;</a>
-            <p>Events at EngSoc</p>
+            <h3>Events at EngSoc</h3>
+            <ul id="eventList""></ul>
         </div>
         <img class="center-fit" src="img/big_logo.png" />
 

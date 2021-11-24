@@ -106,3 +106,9 @@ img {
 .pwa-install-prompt__overlay {
   background: rgb(67, 67, 67) !important;
 }
+
+#eventList {
+  list-style-type: none;
+  margin: 0 5px;
+  padding: 0;
+}
