@@ -54,21 +54,23 @@
                         day = date.toLocaleString("en-US", {day: "numeric"})
                         month = date.toLocaleString("en-US", {month: "numeric"})
                         year = date.toLocaleString("en-US", {year: "numeric"})
+                        hour = date.toLocaleString("en-UK", {hour: "numeric"})
+                        minute = date.toLocaleString("en-UK", {minute: "numeric"})
+
 
                         events.push(
                             `
                             <li style="padding: 5px">
                                 <p style="font-size: 0.9rem; margin-bottom: 0px; font-weight: 700"> ${curr['name']} </p>
-                                <p style="font-size: 0.9rem; margin: 0px"> ${weekday + ' ' + day + '-' + month + '-' + year} </p>
+                                <p style="font-size: 0.9rem; margin: 0px"> ${weekday + ' ' + day + '-' + month + '-' + year + ' ' + hour + ':' + minute} </p>
                                 <p style="font-size: 0.9rem; margin: 0px"> ${curr['place']} </p>
                                 <p style="font-size: 0.9rem; margin: 0px"> ${curr['description']} </p>
-                                
                             </li>
                             `
                         )
                     }
 
-                    document.getElementById("eventList").innerHTML = events.join('')
+                    document.getElementById("eventList").innerHTML = events.reverse().join('')
                 })
 
                 
