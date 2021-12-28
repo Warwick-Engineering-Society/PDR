@@ -21,9 +21,11 @@ app.get("/", async (req, res) => {
     }
 });
 
-app.get('/events', async(req, res) =>{
-    const response = await fetch('https://warwick-engineering-society.github.io/engsoc-events/data.json');
-    const data = await response.json()
+app.get("/events", async (req, res) => {
+    const response = await fetch(
+        "https://warwick-engineering-society.github.io/engsoc-events/data.json"
+    );
+    const data = await response.json();
     return res.send(data);
 });
 

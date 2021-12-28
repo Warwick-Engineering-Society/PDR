@@ -76,17 +76,12 @@
                         document.getElementById("eventList").innerHTML = events.reverse().join('')
                     }
                 })
-                
-
-
-                
-
 
             }
 
             const showEvents = () => {
                 fetchEventData()
-                if ($("#toggle").css('width') == "0px") {
+                if (document.getElementById("toggle").style.width == "0px") {
                     document.getElementById("toggle").style.width = "250px";
                 } else {
                     document.getElementById("toggle").style.width = "0px";
