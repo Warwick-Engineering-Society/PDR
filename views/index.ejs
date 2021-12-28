@@ -44,7 +44,6 @@
                 fetch(`events`, myInit)
                 .then((data) => data.json())
                 .then((data) => {
-                    console.log(data)
                     events = []
                     for (let event in data["data"]) {
                         curr = data["data"][event]
@@ -69,8 +68,7 @@
                             `
                         )
                     }
-
-                    if (events == []) {
+                    if (events.length == 0) {
                         document.getElementById("eventList").innerHTML = "No events are running at the moment."
                     } else {
                         document.getElementById("eventList").innerHTML = events.reverse().join('')
@@ -81,7 +79,7 @@
 
             const showEvents = () => {
                 fetchEventData()
-                if (document.getElementById("toggle").style.width == "0px") {
+                if (document.getElementById("toggle").style.width == "0px" || document.getElementById("toggle").style.width == "") {
                     document.getElementById("toggle").style.width = "250px";
                 } else {
                     document.getElementById("toggle").style.width = "0px";
