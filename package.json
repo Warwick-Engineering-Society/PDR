@@ -24,7 +24,7 @@
     "express-session": "^1.17.1",
     "fs": "^0.0.1-security",
     "node-fetch": "^2.6.1",
-    "passport": "^0.4.1",
+    "passport": "^0.5.2",
     "passport-saml": "^3.2.0",
     "pwa-install-prompt": "^1.1.1"
   },
