@@ -31,10 +31,71 @@
                 data = replaceAll(data, "<br>", "\n");
                 alert(data);
             };
+
+            const fetchEventData = async () => {
+                var myHeaders = new Headers();
+                myHeaders.append("pragma", "no-cache");
+                myHeaders.append("cache-control", "no-cache");
+                var myInit = {
+                    method: "GET",
+                    headers: myHeaders,
+                };
+
+                fetch(`events`, myInit)
+                .then((data) => data.json())
+                .then((data) => {
+                    console.log(data)
+                    events = []
+                    for (let event in data["data"]) {
+                        curr = data["data"][event]
+                        date = new Date(Date.parse(curr['time']))
+                        
+                        weekday = date.toLocaleString("en-US", {weekday: "long"})
+                        day = date.toLocaleString("en-US", {day: "numeric"})
+                        month = date.toLocaleString("en-US", {month: "numeric"})
+                        year = date.toLocaleString("en-US", {year: "numeric"})
+                        hour = date.toLocaleString("en-UK", {hour: "numeric"})
+                        minute = date.toLocaleString("en-UK", {minute: "numeric"})
+
+
+                        events.push(
+                            `
+                            <li style="padding: 5px">
+                                <p style="font-size: 0.9rem; margin-bottom: 0px; font-weight: 700"> ${curr['name']} </p>
+                                <p style="font-size: 0.9rem; margin: 0px"> &#128197; ${weekday + ' ' + day + '-' + month + '-' + year + ' ' + hour + ':' + minute} </p>
+                                <p style="font-size: 0.9rem; margin: 0px"> &#128205; ${curr['place']} </p>
+                                <p style="font-size: 0.9rem; margin: 0px"> ${curr['description']} </p>
+                            </li>
+                            `
+                        )
+                    }
+
+                    if (events == []) {
+                        document.getElementById("eventList").innerHTML = "No events are running at the moment."
+                    } else {
+                        document.getElementById("eventList").innerHTML = events.reverse().join('')
+                    }
+                })
+
+            }
+
+            const showEvents = () => {
+                fetchEventData()
+                if (document.getElementById("toggle").style.width == "0px") {
+                    document.getElementById("toggle").style.width = "250px";
+                } else {
+                    document.getElementById("toggle").style.width = "0px";
+                }
+            }
         </script>
     </head>
 
     <body onload="render()">
+        <div id="toggle">
+            <a id="closeButton" onclick="showEvents()">&times;</a>
+            <h3>Events at EngSoc</h3>
+            <ul id="eventList""></ul>
+        </div>
         <img class="center-fit" src="img/big_logo.png" />
 
         <%- include("pwa_install_prompt.ejs") %>
@@ -49,6 +110,7 @@
             <p>PDR points</p>
             <p>
                 <a class="moreinfo" onclick="moreInfo()">More Info</a>
+                <a class="moreinfo" onclick="showEvents()">Events</a>
             </p>
             <p style="font-size: 0.65em; margin: 0 40px;">
                 Please note this app only shows PDR points gained at Engineering Society events
